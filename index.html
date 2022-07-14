@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lobster&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+      crossorigin="anonymous"
+    ></script>
+    <title>Calculador JS</title>
+  </head>
+
+  <body class="d-flex">
+    <div class="container">
+      <div class="row d-flex justify-content-center row-cols-md-3 g-4">
+        <div class="col d-flex">
+          <div class="card d-flex h-100">
+            <div class="d-flex">
+              <img
+                src="assets/img/macbook.jpeg"
+                class="card-img-top"
+                alt="..."
+              />
+            </div>
+            <div class="card-body gap-2 d-flex flex-column align-items-center">
+              <h5 class="card-title d-flex flex-column text-align-center"></h5>
+              <input
+                class="d-flex flex-row"
+                type="number"
+                min="1"
+                placeholder="cantidad"
+                id="cantidad"
+                width="50%"
+                required
+              />
+              <!-- <select type="color" name="colores" id="color">
+                <option value="#D3D3D3" type="color">silver</option>
+                <option value="#b2b6b8" type="color">space-grey</option>
+              </select>
+              <p class="text-light">or</p> -->
+              <input
+                type="text"
+                id="colores-txt"
+                placeholder="insert your color"
+              />
+              <input type="color" name="color" id="colors" value="#fff"/>
+              <div>
+                <p class="text-light gap-2">
+                  Precio : $ <span class="precio">400000</span>
+                </p>
+              </div>
+              <div>
+                <button onclick="miFunc()">Calcular Total</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col d-flex resultado" style="opacity: 0.9">
+          <div class="resultado2 gap-2">
+            <div>
+              <p>Total : $<span id="mitotal">0</span></p>
+            </div>
+            <div>
+              <p>Cantidad :  <span id="micantidad">0</span></p>
+            </div>
+            <div>
+              <p>
+                Color : <span id="finalselected"></span
+                ><span
+                  id="micolor"
+                  width="20px"
+                  height="30px"
+                  border-radius="50%"
+                  margin-right="5px"
+                  padding="2px"
+                  >◯
+                </span>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+      //variables
+      let miColor = document.querySelector("#micolor");
+      let body = document.querySelector("body");
+      body.style.backgroundImage = "url('assets/img/fondo.jpeg')";
+      body.style.height = "100vh";
+      let container = document.querySelector(".container");
+      container.style.display = "flex";
+      container.style.flexDirection = "column";
+      container.style.justifyContent = "center";
+      let card = document.querySelector(".card");
+      card.style.backgroundColor = "#2E4053";
+      card.style.padding = "2em";
+      let img = document.querySelector(".card-img-top");
+      img.style.borderRadius = "2px";
+      img.style.width = "100%";
+      let cardTitle = document.querySelector(".card-title");
+      cardTitle.style.color = "white";
+      cardTitle.style.fontFamily = "Lobster, cursive";
+      cardTitle.innerHTML = "MacBook Pro";
+      let resultado = document.querySelector(".resultado");
+      resultado.style.display = "flex";
+      resultado.style.flexDirection = "column";
+      resultado.style.justifyContent = "center";
+      let resultado2 = document.querySelector(".resultado2");
+      resultado2.style.backgroundColor = "aliceblue";
+      resultado2.style.borderRadius = "3px";
+      resultado2.style.padding = "2em";
+      resultado2.style.display = "flex";
+      resultado2.style.flexDirection = "column";
+      resultado2.style.justifyContent = "center";
+      miColor.style.width = "20px";
+      miColor.style.height = "20px";
+      miColor.style.borderRadius = "100%";
+      //Input colors
+      let coloresTxt = document.querySelector("#colores-txt")
+      let colors = document.querySelector("#colors");
+
+      colors.addEventListener("change", function () {
+        coloresTxt.value = colors.value;
+        
+      });
+
+      //funcion de impresion detalles
+      function miFunc() {
+        let cantidad = document.querySelector("#cantidad").value;
+        let precio = document.querySelector(".precio").innerHTML;
+        let total = parseInt(cantidad) * parseInt(precio);
+        let miTotal = document.querySelector("#mitotal");
+        let miCantidad = document.querySelector("#micantidad");
+        // let color = document.querySelector('#color').value;
+        // // let color = document.querySelector("#color");
+        // let nameColor =document.querySelector('#color')
+        let miColor = document.querySelector("#micolor");
+        // let selected = nameColor.options[nameColor.selectedIndex].text;
+        // let finalSelected = document.querySelector("#finalselected");
+
+        // color.addEventListener("change", function() {
+        //   micolor.style.backgroundColor = nameColor;
+        // })
+
+        if (cantidad >= 1) {
+          miTotal.innerHTML = "$" + parseInt(total);
+          miCantidad.innerHTML = cantidad;
+          miColor.style.backgroundColor = coloresTxt.value;
+
+        //   if (color === "#D3D3D3") {
+        //     miColor.style.backgroundColor = "#D3D3D3";
+        //   } else {
+        //     miColor.style.backgroundColor = "#b2b6b8";
+        //   }
+
+        //   let selected = nameColor.options[nameColor.selectedIndex].text;
+        //   let finalSelected = document.querySelector("#finalselected");
+        //   finalSelected.innerHTML = selected;
+        } else {
+          alert("Por favor ingresar cantidad requerida.");
+        }
+        console.log(cantidad, precio,coloresTxt);
+       };
+    </script>
+  </body>
+</html>
